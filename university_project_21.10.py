@@ -186,123 +186,187 @@ if __name__ == "__main__":
     main()
 
 def addition_student(conn, name, surname, department, date_of_birth):
-    cursor = conn.cursor()
-    cursor.execute("""INSERT INTO Students (Name, Surname, Department, DateOfBirth) VALUES (?, ?, ?, ?)""", (name, surname, department, date_of_birth))
-    conn.commit()
-    print("Студент добавлен")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Students (Name, Surname, Department, DateOfBirth) VALUES (?, ?, ?, ?)""", (name, surname, department, date_of_birth))
+        conn.commit()
+        print("Студент добавлен")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def addition_teacher(conn, name, surname, department):
-    cursor = conn.cursor()
-    cursor.execute("""INSERT INTO Teachers (Name, Surname, Department) VALUES (?, ?, ?)""", (name, surname, department))
-    conn.commit()
-    print("Преподаватель добавлен")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Teachers (Name, Surname, Department) VALUES (?, ?, ?)""", (name, surname, department))
+        conn.commit()
+        print("Преподаватель добавлен")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def addition_course(conn, title, description, teacher_id):
-    cursor = conn.cursor()
-    cursor.execute("""INSERT INTO Courses (Title, Description, TeacherID) VALUES (?, ?, ?)""", (title, description, teacher_id))
-    conn.commit()
-    print("Курс добавлен")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Courses (Title, Description, TeacherID) VALUES (?, ?, ?)""", (title, description, teacher_id))
+        conn.commit()
+        print("Курс добавлен")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def addition_exam(conn, date, course_id, max_score):
-    cursor = conn.cursor()
-    cursor.execute("""INSERT INTO Exams (Date, CourseID, MaxScore) VALUES (?, ?, ?)""", (date, course_id, max_score))
-    conn.commit()
-    print("Экзамен добавлен")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Exams (Date, CourseID, MaxScore) VALUES (?, ?, ?)""", (date, course_id, max_score))
+        conn.commit()
+        print("Экзамен добавлен")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def addition_grade(conn, student_id, exam_id, score):
-    cursor = conn.cursor()
-    cursor.execute("""INSERT INTO Grades (StudentID, ExamID, Score) VALUES (?, ?, ?)""", (student_id, exam_id, score))
-    conn.commit()
-    print("Оценка добавлена")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Grades (StudentID, ExamID, Score) VALUES (?, ?, ?)""", (student_id, exam_id, score))
+        conn.commit()
+        print("Оценка добавлена")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def change_student(conn, student_id, name, surname, department, date_of_birth):
-    cursor = conn.cursor()
-    cursor.execute("""UPDATE Students
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE Students
                         SET Name = ?, Surname = ?, Department = ?, DateOfBirth = ?
                         WHERE ID = ?""", (name, surname, department, date_of_birth, student_id))
-    conn.commit()
-    print("Информация о студенте изменена")
+        conn.commit()
+        print("Информация о студенте изменена")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def change_teacher(conn, teacher_id, name, surname, department):
-    cursor = conn.cursor()
-    cursor.execute("""UPDATE Teachers
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE Teachers
                         SET Name = ?, Surname = ?, Department = ?
                         WHERE ID = ?""", (name, surname, department, teacher_id))
-    conn.commit()
-    print("Информация о преподавателе изменена")
+        conn.commit()
+        print("Информация о преподавателе изменена")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def change_course(conn, course_id, title, description, teacher_id):
-    cursor = conn.cursor()
-    cursor.execute("""UPDATE Courses
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE Courses
                         SET Title = ?, Description = ?, TeacherID = ?
                         WHERE ID = ?""", (title, description, teacher_id, course_id))
-    conn.commit()
-    print("Информация о курсе изменена")
+        conn.commit()
+        print("Информация о курсе изменена")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def remove_student(conn, student_id):
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM Students WHERE ID = ?""", (student_id,))
-    conn.commit()
-    print("Студент удалён")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""DELETE FROM Students WHERE ID = ?""", (student_id,))
+        conn.commit()
+        print("Студент удалён")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def remove_teacher(conn, teacher_id):
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM Teachers WHERE ID = ?""", (teacher_id,))
-    conn.commit()
-    print("Преподаватель удалён")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""DELETE FROM Teachers WHERE ID = ?""", (teacher_id,))
+        conn.commit()
+        print("Преподаватель удалён")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def remove_course(conn, course_id):
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM Courses WHERE ID = ?""", (course_id,))
-    conn.commit()
-    print("Курс удалён")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""DELETE FROM Courses WHERE ID = ?""", (course_id,))
+        conn.commit()
+        print("Курс удалён")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def remove_exam(conn, exam_id):
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM Exams WHERE ID = ?""", (exam_id,))
-    conn.commit()
-    print("Экзамен удалён")
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""DELETE FROM Exams WHERE ID = ?""", (exam_id,))
+        conn.commit()
+        print("Экзамен удалён")
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
 
 def receiving_department_students(conn, department):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM Students WHERE Department = ?""", (department,))
-    return cursor.fetchall()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM Students WHERE Department = ?""", (department,))
+        return cursor.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return []
 
 def receiving_teacher_courses(conn, teacher_id):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM Courses WHERE TeacherID = ?""", (teacher_id,))
-    return cursor.fetchall()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM Courses WHERE TeacherID = ?""", (teacher_id,))
+        return cursor.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return []
 
 def receiving_course_students(conn, course_id):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT Students.* FROM Students
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT Students.* FROM Students
                         JOIN Grades ON Students.ID = Grades.StudentID
                         JOIN Exams ON Grades.ExamID = Exams.ID
                         WHERE Exams.CourseID = ?""", (course_id,))
-    return cursor.fetchall()
+        return cursor.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return []
 
 def receiving_course_grades(conn, course_id):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT Grades.* FROM Grades
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT Grades.* FROM Grades
                         JOIN Exams ON Grades.ExamID = Exams.ID
                         WHERE Exams.CourseID = ?""", (course_id,))
-    return cursor.fetchall()
+        return cursor.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return []
 
 def receiving_average_course_grade(conn, student_id, course_id):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT AVG(Grades.Score) FROM Grades
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT AVG(Grades.Score) FROM Grades
                         JOIN Exams ON Grades.ExamID = Exams.ID
                         WHERE Grades.StudentID = ? AND Exams.CourseID = ?""", (student_id, course_id))
-    return cursor.fetchone()[0]
+        return cursor.fetchone()[0]
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return None
 
 def receiving_average_student_grade(conn, student_id):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT AVG(Score) FROM Grades WHERE StudentID = ?""", (student_id,))
-    return cursor.fetchone()[0]
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT AVG(Score) FROM Grades WHERE StudentID = ?""", (student_id,))
+        return cursor.fetchone()[0]
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return None
 
 def receiving_average_department_grade(conn, department):
-    cursor = conn.cursor()
-    cursor.execute("""SELECT AVG(Grades.Score) FROM Grades
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT AVG(Grades.Score) FROM Grades
                         JOIN Students ON Grades.StudentID = Students.ID
                         WHERE Students.Department = ?""", (department,))
-    return cursor.fetchone()[0]
+        return cursor.fetchone()[0]
+    except sqlite3.Error as e:
+        print(f"Error!: {e}")
+        return None
